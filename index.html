@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Expansão da Consciência</title>
+  <title>Gratidão - 375 Dias</title>
   <style>
     @font-face {
       font-family: 'Ahkio';
@@ -21,11 +21,11 @@
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      background: linear-gradient(135deg, #ffe4e1, #e6e6fa, #e0ffff, #fffacd);
-      position: relative;
-      overflow: hidden;
+      background: linear-gradient(135deg, #fceae8, #e7f5f3, #fdf6e3);
       color: #000;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
     body::before {
@@ -39,16 +39,9 @@
       background-image:
         url('https://i.postimg.cc/SRQ1XYD8/images-1-4.png'),
         url('https://i.postimg.cc/SRQ1XYD8/images-1-4.png'),
-        url('https://i.postimg.cc/SRQ1XYD8/images-1-4.png'),
-        url('https://i.postimg.cc/SRQ1XYD8/images-1-4.png'),
         url('https://i.postimg.cc/SRQ1XYD8/images-1-4.png');
       background-repeat: no-repeat;
-      background-position:
-        10% 15%,
-        50% 5%,
-        80% 30%,
-        25% 70%,
-        75% 75%;
+      background-position: 10% 15%, 80% 10%, 50% 80%;
       background-size: 40px 40px;
       opacity: 0.3;
       z-index: 0;
@@ -57,16 +50,14 @@
     .creditos {
       font-size: 14px;
       margin-bottom: 12px;
-      color: #222;
+      color: #333;
       font-weight: bold;
-      position: relative;
       z-index: 2;
     }
 
     .colecao {
       width: 170px;
       margin-bottom: 20px;
-      position: relative;
       z-index: 2;
     }
 
@@ -80,24 +71,51 @@
       max-width: 90%;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       margin-bottom: 30px;
-      position: relative;
       z-index: 2;
     }
 
     .logo {
       width: 180px;
-      opacity: 1;
-      margin-top: 0;
-      position: relative;
       z-index: 2;
+    }
+
+    .controle-audio {
+      margin-top: 10px;
+      z-index: 2;
+    }
+
+    button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 20px;
+      background-color: #b8d8d8;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #a2cfcf;
     }
   </style>
 </head>
 <body>
   <div class="creditos">Feito por MugShopp - Presentes Personalizados</div>
-  <img class="colecao" src="https://i.postimg.cc/ZYsLX2bx/file-0000000087c061f9acbc0cbda72e51fe-1.png" alt="Imagem Coleção Gratidão" />
+  <img class="colecao" src="https://i.postimg.cc/ZYsLX2bx/file-0000000087c061f9acbc0cbda72e51fe-1.png" alt="Coleção Gratidão" />
   <div class="frase" id="frase">Carregando frase...</div>
   <img class="logo" src="https://i.postimg.cc/7LWQCZjQ/Logo-Alta-Resolu-o-1.png" alt="Logo MugShopp" />
+
+  <!-- Música de fundo -->
+  <audio id="musica" loop autoplay>
+    <source src="Air - Johann Sebastian Bach.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <!-- Botão para ligar/desligar música -->
+  <div class="controle-audio">
+    <button onclick="alternarAudio()">🔊 Música: Ativada</button>
+  </div>
 
   <script>
     async function carregarFrase() {
@@ -107,7 +125,7 @@
         const texto = await response.text();
         const frases = texto.split('\n').filter(l => l.trim() !== '');
         const hoje = new Date();
-        const inicio = new Date(hoje.getFullYear(), 0, 1); // 1º de janeiro
+        const inicio = new Date(hoje.getFullYear(), 0, 1);
         const diff = hoje - inicio;
         const umDia = 1000 * 60 * 60 * 24;
         const diaDoAno = Math.floor(diff / umDia);
@@ -118,7 +136,20 @@
         console.error(e);
       }
     }
+
     carregarFrase();
+
+    function alternarAudio() {
+      const audio = document.getElementById('musica');
+      const botao = document.querySelector('.controle-audio button');
+      if (audio.paused) {
+        audio.play();
+        botao.textContent = '🔊 Música: Ativada';
+      } else {
+        audio.pause();
+        botao.textContent = '🔇 Música: Desativada';
+      }
+    }
   </script>
 </body>
 </html>
